@@ -24,6 +24,7 @@ services:
       - "9200"
     ports:
       - "${ELASTIC_PORT}:9200"
+    mem_limit: 3gb
 
   kibana:
     container_name: kibana
