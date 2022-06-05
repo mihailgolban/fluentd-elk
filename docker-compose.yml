@@ -5,6 +5,9 @@ services:
     build: ./fluentd
     volumes:
       - ./fluentd/conf:/fluentd/etc
+    environment:
+      - ELASTIC_PASSWORD=$ELASTIC_PASSWORD
+    restart: always
     links:
       - "elasticsearch"
     ports:
@@ -20,6 +23,7 @@ services:
       - ELASTIC_PASSWORD=$ELASTIC_PASSWORD
     volumes:
       - ${PWD}/esdata:/usr/share/elasticsearch/data
+    restart: always
     expose:
       - "9200"
     ports:
@@ -31,6 +35,7 @@ services:
     image: docker.elastic.co/kibana/kibana:8.2.2
     links:
       - "elasticsearch"
+    restart: always
     environment:
       ELASTICSEARCH_USERNAME: kibana
       ELASTICSEARCH_PASSWORD: $KIBANA_PASSWORD
